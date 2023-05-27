@@ -3,21 +3,22 @@
 require '../models/actividad.php';
 require '../controllers/conexionDbController.php';
 require '../controllers/baseController.php';
-require '../controllers/usuariosController.php';
+require '../controllers/actividadController.php';
 
 
 use actividad\Actividad;
-use usuarioController\UsuarioController;
+use actividadController\ActividadController;
 
+$codigo = empty($_GET['codigo']) ? '' : $_GET['codigo'];
 $id= empty($_GET['id']) ? '' : $_GET['id'];
-$titulo= 'Registrar Usuario';
+$titulo= 'Registrar Actividad';
 $urlAction = "accion_registro_actividad.php";
 $actividad = new Actividad();
 if (!empty($id)){
-    $titulo ='Modificar Usuario';
-    $urlAction = "accion_modificar_usuario.php";
-    $usuarioController = new UsuarioController();
-    $actividad = $usuarioController->readRow($id);
+    $titulo ='Modificar Actividad';
+    $urlAction = "accion_modificar_actividad.php";
+    $actividadController = new ActividadController();
+    $actividad = $actividadController->readRow($id);
 }
 ?>
 <!DOCTYPE html>
@@ -44,6 +45,10 @@ if (!empty($id)){
         <label>
             <span>Nota:</span>
             <input type="text" name="nota" value="<?php echo $actividad->getNota(); ?>" required>
+        </label>
+        <br>
+        <label>
+            <input type="hidden" name="codigo" value="<?php echo $actividad->getCodEs(); ?>" required>
         </label>
         <br>
         <button type="submit">Guardar</button>

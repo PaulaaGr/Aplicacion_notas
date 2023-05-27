@@ -8,7 +8,7 @@ use estudiante\Estudiante;
 use usuarioController\UsuarioController;
 
 $codigo= empty($_GET['codigo']) ? '' : $_GET['codigo'];
-$titulo= 'Registrar Usuario';
+$titulo= 'Registrar Estudiante';
 $urlAction = "accion_registro_usuario.php";
 $estudiante = new Estudiante();
 if (!empty($codigo)){

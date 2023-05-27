@@ -1,24 +1,25 @@
 <?php
-require '../models/usuario.php';
 require '../models/actividad.php';
 require '../controllers/conexionDbController.php';
 require '../controllers/baseController.php';
-require '../controllers/usuariosController.php';
+require '../controllers/actividadController.php';
 
 use actividad\Actividad;
-use usuarioController\UsuarioController;
+use actividadController\ActividadController;
 
-$actividad = new Actividad();
+$actividad= new Actividad();
+
 $actividad->setId($_POST['id']);
 $actividad->setDescr($_POST['descripcion']);
 $actividad->setNota($_POST['nota']);
+$actividad->setCodEs($_POST['codigo']);
 
-$usuarioController = new UsuarioController();
-$resultado = $usuarioController->create($estudiante, $actividad);
+$actividadController = new ActividadController();
+$resultado = $actividadController->create($actividad);
 if ($resultado) {
-    echo '<h1>Usuarios registrado</h1>';
+    echo '<h1>Actividad registrada</h1>';
 } else {
-    echo '<h1>No se pudo registrar el usuario</h1>';
+    echo '<h1>No se pudo registrar la atividad</h1>';
 }
 ?>
 <br>

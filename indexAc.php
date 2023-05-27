@@ -3,13 +3,13 @@ require 'models/usuario.php';
 require 'models/actividad.php';
 require 'controllers/conexionDbController.php';
 require 'controllers/baseController.php';
-require 'controllers/usuariosController.php';
+require 'controllers/actividadController.php';
 
-use usuarioController\UsuarioController;
+use actividadController\ActividadController;
 
-$usuarioController = new UsuarioController();
+$actividadController = new ActividadController();
 
-$actividades = $usuarioController->readAc();
+$actividades = $actividadController->read();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -39,7 +39,7 @@ $actividades = $usuarioController->readAc();
                     echo '  <td>' . $actividad->getDescr() . '</td>';
                     echo '  <td>' . $actividad->getNota() . '</td>';
                     echo '  <td>';
-                    echo '      <a href="views/form_actividad.php?id=' . $actividad->getId() . '">modificar</a>';
+                    echo '      <a href="views/accion_modificar_actividad.php?id=' . $actividad->getId() . '">modificar</a>';
                     echo '      <a href="views/accion_borrar_actividad.php?id=' . $actividad->getId() . '">borrar</a>';
                     echo '  </td>';
                     echo '</tr>';

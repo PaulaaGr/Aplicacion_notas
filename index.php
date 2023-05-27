@@ -20,14 +20,14 @@ $estudiantes = $usuarioController->read();
 
 <body>
     <main>
-        <h1>Lista de usuarios</h1>
-        <a href="views/form_usuario.php">Registrar usuario</a>
+        <h1>Lista de estudiantes</h1>
+        <a href="views/form_usuario.php">Registrar estudiante</a>
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>CODIGO</th>
                     <th>NOMBRE</th>
+                    <th>APELLIDO</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,8 +38,9 @@ $estudiantes = $usuarioController->read();
                     echo '  <td>' . $estudiante->getNombre() . '</td>';
                     echo '  <td>' . $estudiante->getApellido() . '</td>';
                     echo '  <td>';
-                    echo '      <a href="views/form_usuario.php?id=' . $estudiante->getCodigo() . '">modificar</a>';
-                    echo '      <a href="views/accion_borrar_usuario.php?id=' . $estudiante->getCodigo() . '">borrar</a>';
+                    echo '      <a href="views/form_usuario.php?codigo=' . $estudiante->getCodigo() . '">modificar</a>';
+                    echo '      <a href="views/accion_borrar_usuario.php?codigo=' . $estudiante->getCodigo() . '">borrar</a>';
+                    echo '      <a href="indexAc.php?codigo=' . $estudiante->getCodigo() . '">Actividades</a>';
                     echo '  </td>';
                     echo '</tr>';
                 }
@@ -47,7 +48,6 @@ $estudiantes = $usuarioController->read();
             </tbody>
         </table>
     </main>
-    <a href="../index.php">Volver al inicio</a>
 </body>
 
 </html>

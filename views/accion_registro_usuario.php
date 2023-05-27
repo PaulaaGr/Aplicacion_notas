@@ -10,21 +10,19 @@ use actividad\Actividad;
 use usuarioController\UsuarioController;
 
 $estudiante = new Estudiante();
+//$actividad = new Actividad();
+
 $estudiante->setCodigo($_POST['codigo']);
 $estudiante->setNombre($_POST['nombres']);
 $estudiante->setApellido($_POST['apellidos']);
-
-$actividad = new Actividad();
-$actividad->setId($_POST['id']);
-$actividad->setDescr($_POST['descripcion']);
-$actividad->setNota($_POST['nota']);
+//$actividad -> setCodEs($_POST['codigo']);
 
 $usuarioController = new UsuarioController();
-$resultado = $usuarioController->create($estudiante, $actividad);
+$resultado = $usuarioController->create($estudiante);
 if ($resultado) {
-    echo '<h1>Usuarios registrado</h1>';
+    echo '<h1>Estudiante registrado</h1>';
 } else {
-    echo '<h1>No se pudo registrar el usuario</h1>';
+    echo '<h1>No se pudo registrar el estudiante</h1>';
 }
 ?>
 <br>

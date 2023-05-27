@@ -8,6 +8,7 @@ use estudiante\Estudiante;
 use usuarioController\UsuarioController;
 
 $estudiante = new Estudiante();
+
 $estudiante->setCodigo($_POST['codigo']);
 $estudiante->setNombre($_POST['nombres']);
 $estudiante->setApellido($_POST['apellidos']);
