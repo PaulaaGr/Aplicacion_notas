@@ -5,14 +5,8 @@ require '../controllers/conexionDbController.php';
 require '../controllers/baseController.php';
 require '../controllers/usuariosController.php';
 
-use estudiante\Estudiante;
 use actividad\Actividad;
 use usuarioController\UsuarioController;
-
-$estudiante = new Estudiante();
-$estudiante->setCodigo($_POST['codigo']);
-$estudiante->setNombre($_POST['nombres']);
-$estudiante->setApellido($_POST['apellidos']);
 
 $actividad = new Actividad();
 $actividad->setId($_POST['id']);

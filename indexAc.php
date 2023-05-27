@@ -1,5 +1,6 @@
 <?php
 require 'models/usuario.php';
+require 'models/actividad.php';
 require 'controllers/conexionDbController.php';
 require 'controllers/baseController.php';
 require 'controllers/usuariosController.php';
@@ -8,7 +9,7 @@ use usuarioController\UsuarioController;
 
 $usuarioController = new UsuarioController();
 
-$estudiantes = $usuarioController->read();
+$actividades = $usuarioController->readAc();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -20,26 +21,26 @@ $estudiantes = $usuarioController->read();
 
 <body>
     <main>
-        <h1>Lista de usuarios</h1>
-        <a href="views/form_usuario.php">Registrar usuario</a>
+        <h1>Lista de actividades</h1>
+        <a href="views/form_actividad.php">Registrar actividad</a>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>CODIGO</th>
-                    <th>NOMBRE</th>
+                    <th>DESCRIPCIÓN</th>
+                    <th>NOTA</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                foreach ($estudiantes as $estudiante) {
+                foreach ($actividades as $actividad) {
                     echo '<tr>';
-                    echo '  <td>' . $estudiante->getCodigo() . '</td>';
-                    echo '  <td>' . $estudiante->getNombre() . '</td>';
-                    echo '  <td>' . $estudiante->getApellido() . '</td>';
+                    echo '  <td>' . $actividad->getId() . '</td>';
+                    echo '  <td>' . $actividad->getDescr() . '</td>';
+                    echo '  <td>' . $actividad->getNota() . '</td>';
                     echo '  <td>';
-                    echo '      <a href="views/form_usuario.php?id=' . $estudiante->getCodigo() . '">modificar</a>';
-                    echo '      <a href="views/accion_borrar_usuario.php?id=' . $estudiante->getCodigo() . '">borrar</a>';
+                    echo '      <a href="views/form_actividad.php?id=' . $actividad->getId() . '">modificar</a>';
+                    echo '      <a href="views/accion_borrar_actividad.php?id=' . $actividad->getId() . '">borrar</a>';
                     echo '  </td>';
                     echo '</tr>';
                 }

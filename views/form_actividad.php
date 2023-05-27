@@ -1,21 +1,23 @@
 <?php
-require '../models/usuario.php';
+
+require '../models/actividad.php';
 require '../controllers/conexionDbController.php';
 require '../controllers/baseController.php';
 require '../controllers/usuariosController.php';
 
-use estudiante\Estudiante;
+
+use actividad\Actividad;
 use usuarioController\UsuarioController;
 
-$codigo= empty($_GET['codigo']) ? '' : $_GET['codigo'];
+$id= empty($_GET['id']) ? '' : $_GET['id'];
 $titulo= 'Registrar Usuario';
-$urlAction = "accion_registro_usuario.php";
-$estudiante = new Estudiante();
-if (!empty($codigo)){
+$urlAction = "accion_registro_actividad.php";
+$actividad = new Actividad();
+if (!empty($id)){
     $titulo ='Modificar Usuario';
     $urlAction = "accion_modificar_usuario.php";
     $usuarioController = new UsuarioController();
-    $estudiante = $usuarioController->readRow($codigo);
+    $actividad = $usuarioController->readRow($id);
 }
 ?>
 <!DOCTYPE html>
@@ -30,24 +32,22 @@ if (!empty($codigo)){
     <h1><?php echo $titulo; ?></h1>
     <form action="<?php echo $urlAction;?>" method="post">
         <label>
-            <span>Codigo:</span>
-            <input type="number" name="codigo" min="1" value="<?php echo $estudiante->getCodigo(); ?>" required>
+            <span>Id:</span>
+            <input type="number" name="id" min="1" value="<?php echo $actividad->getId(); ?>" required>
         </label>
         <br>
         <label>
-            <span>Nombre:</span>
-            <input type="text" name="nombres" value="<?php echo $estudiante->getNombre(); ?>" required>
+            <span>Descripción:</span>
+            <input type="text" name="descripcion" value="<?php echo $actividad->getDescr(); ?>" required>
         </label>
         <br>
         <label>
-            <span>Apellido:</span>
-            <input type="text" name="apellidos" value="<?php echo $estudiante->getApellido(); ?>" required>
+            <span>Nota:</span>
+            <input type="text" name="nota" value="<?php echo $actividad->getNota(); ?>" required>
         </label>
         <br>
         <button type="submit">Guardar</button>
     </form>
-    <br>
-
 </body>
 
 </html>
