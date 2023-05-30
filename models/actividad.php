@@ -7,7 +7,7 @@ class Actividad
     private $id;
     private $descripcion;
     private $nota;
-    private $codigoestudiante;
+    private $codigoEstudiante;
 
     public function getId()
     {
@@ -36,10 +36,10 @@ class Actividad
     }
     public function getCodEs()
     {
-        return $this->codigoestudiante;
+        return $this->codigoEstudiante;
     }
     public function setCodEs($value)
     {
-        $this->codigoestudiante = $value;
+        $this->codigoEstudiante = $value;
     }
 }

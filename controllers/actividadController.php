@@ -2,47 +2,43 @@
 
 namespace actividadController;
 
-use baseControler\BaseController;
 use conexionDb\ConexionDbController;
 use actividad\Actividad;
 
-class ActividadController extends BaseController
+class ActividadController 
 {
 
     function create($actividad)
     {
 
-         $sql2 = 'insert into actividades ';
-         $sql2 .= '(id,descripcion,nota,codigoEstudiante) values ';
-         $sql2 .= '(';
-         $sql2 .= $actividad->getId() . ',';
-         $sql2 .= '"' . $actividad->getDescr() . '",';
-         $sql2 .= '"' . $actividad->getNota() . '"';
-         $sql2 .= ')';
+         $sql = 'insert into actividades ';
+         $sql .= '(descripcion,nota,codigoEstudiante) values ';
+         $sql .= '(';
+         $sql .= '"' . $actividad->getDescr() . '",';
+         $sql .= '"' . $actividad->getNota() . '",';
+         $sql .= '"' . $actividad->getCodEs() . '"';
+         $sql .= ')';
          $conexiondb = new ConexionDbController();
-         $resultadoSQL2 = $conexiondb->execSQL($sql2);
+         $resultadoSQL = $conexiondb->execSQL($sql);
          $conexiondb->close();
 
-        if ($resultadoSQL2) {
-            return true;
-        } else {
-            return false;
-        }
+            return $resultadoSQL;
+        
     }
 
 
 
-    function read()
+    function read($codigo)
     {
-        $sql2 = 'select * from actividades';
+        $sql = 'select * from actividades where codigoEstudiante = '.$codigo;
         $conexiondb = new ConexionDbController();
-        $resultadoSQL2 = $conexiondb->execSQL($sql2);
+        $resultadoSQL = $conexiondb->execSQL($sql);
         $actividades = [];
-        while ($registro2 = $resultadoSQL2->fetch_assoc()) {
-            $actividad = new Actividad();
-            $actividad->setId($registro2['id']);
-            $actividad->setDescr($registro2['descripcion']);
-            $actividad->setNota($registro2['nota']);
+        while ($registro = $resultadoSQL->fetch_assoc()) {
+            $actividad = new Actividad();   
+            $actividad->setId($registro['id']);
+            $actividad->setDescr($registro['descripcion']);
+            $actividad->setNota($registro['nota']);
             array_push($actividades, $actividad);
         }
         $conexiondb->close();
@@ -50,16 +46,17 @@ class ActividadController extends BaseController
     }
 
 
-    function readRow($codigo)
+    function readRow($id)
     {
-        $sql = 'select * from estudiantes';
-        $sql .= ' where codigoEstudiante=' . $codigo;
+        $sql = 'select * from actividades';
+        $sql .= ' where id=' . $id;
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
         $actividad = new Actividad();
-        while ($registro2 = $resultadoSQL->fetch_assoc()) {
-            $actividad->setDescr($registro2['descripcion']);
-            $actividad->setNota($registro2['nota']);
+        while ($registro = $resultadoSQL->fetch_assoc()) {
+            $actividad->setId($registro['id']);
+            $actividad->setDescr($registro['descripcion']);
+            $actividad->setNota($registro['nota']);
         }
         $conexiondb->close();
         return $actividad;
@@ -67,21 +64,20 @@ class ActividadController extends BaseController
 
     function update($id, $actividad)
     {
-        $sql2 = 'update actividades set ';
-        $sql2 .= 'id=' . $actividad->getId() . '",';
-        $sql2 .= 'descripcion=' . $actividad->getDescr() . '",';
-        $sql2 .= 'nota=' . $actividad->getNota() . '",';
-        $sql2 .= ' where id=' . $id;
+        $sql = 'update actividades set ';
+        $sql .= 'descripcion="' . $actividad->getDescr() . '",';
+        $sql .= 'nota="' . $actividad->getNota() . '"';
+        $sql .= ' where id=' . $id;
         $conexiondb = new ConexionDbController();
-        $resultadoSQL2 = $conexiondb->execSQL($sql2);
+        $resultadoSQL = $conexiondb->execSQL($sql);
         $conexiondb->close();
-        return $resultadoSQL2;
+        return $resultadoSQL;
     }
 
 
-    function delete($codigo)
+    function delete($id)
     {
-        $sql = 'delete from actividades where codigoEstudiante=' . $codigo;
+        $sql = 'delete from actividades where id=' . $id;
         $conexiondb = new ConexionDbController();
         $resultadoSQL = $conexiondb->execSQL($sql);
         $conexiondb->close();

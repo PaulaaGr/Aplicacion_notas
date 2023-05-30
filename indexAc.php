@@ -8,8 +8,9 @@ require 'controllers/actividadController.php';
 use actividadController\ActividadController;
 
 $actividadController = new ActividadController();
+$codigo = $_GET['codigo'];
 
-$actividades = $actividadController->read();
+$actividades = $actividadController->read($codigo);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -22,7 +23,7 @@ $actividades = $actividadController->read();
 <body>
     <main>
         <h1>Lista de actividades</h1>
-        <a href="views/form_actividad.php">Registrar actividad</a>
+        <a href="views/form_actividad.php?codigo=<?php echo $codigo;?>">Registrar actividad</a>
         <table>
             <thead>
                 <tr>
@@ -33,22 +34,43 @@ $actividades = $actividadController->read();
             </thead>
             <tbody>
                 <?php
+                $contar=0;
+                $nota=0;
+                $promedio=0;
+                
                 foreach ($actividades as $actividad) {
+                    $contar+=1;
                     echo '<tr>';
                     echo '  <td>' . $actividad->getId() . '</td>';
                     echo '  <td>' . $actividad->getDescr() . '</td>';
                     echo '  <td>' . $actividad->getNota() . '</td>';
+                    echo '  <td>' . $actividad->getCodEs().'</td>';
                     echo '  <td>';
-                    echo '      <a href="views/accion_modificar_actividad.php?id=' . $actividad->getId() . '">modificar</a>';
-                    echo '      <a href="views/accion_borrar_actividad.php?id=' . $actividad->getId() . '">borrar</a>';
+                    $nota=$actividad->getNota()+$nota;
+                    $promedio = $nota/$contar;
+                    echo '      <a href="views/form_actividad.php?id=' . $actividad->getId() . '&codigo=' . $codigo . '">Modificar</a>';
+                    echo '      <a href="views/accion_borrar_actividad.php?id=' .$actividad->getId() . '&codigo=' . $codigo . '">Borrar</a>';
                     echo '  </td>';
                     echo '</tr>';
                 }
                 ?>
             </tbody>
-        </table>
+            </table>
+            <?php
+            if ($promedio !=0){
+                echo '<p>EL PROMEDIO ES:'.$promedio.'</p>';
+            }
+            if ($promedio < 3 && $promedio>0){
+                echo '<h1 style="color:red">No aprobó</h1>';
+            }else if ($promedio == 0){
+                echo '<h1 style="color:blue">Registre las notas</h1>';
+            }else{
+                echo '<h1 style="color:green">Felicidades, aprobó</h1>';
+            }
+            ?>
     </main>
-    <a href="../index.php">Volver al inicio</a>
+    <br>
+    <a href="index.php">Volver al inicio</a>
 </body>
 
 </html>

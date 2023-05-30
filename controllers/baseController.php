@@ -2,11 +2,10 @@
 
 abstract class BaseController
 {
-    abstract function create($model);
+    abstract function create($estudiante);
     abstract function read();
-    abstract function update($codigo, $model);
+    abstract function update($id, $codigo);
     abstract function delete($codigo);
-    abstract function readRow($codigo);
 
 
 

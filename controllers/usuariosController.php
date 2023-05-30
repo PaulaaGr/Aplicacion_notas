@@ -5,7 +5,6 @@ namespace usuarioController;
 use baseControler\BaseController;
 use conexionDb\ConexionDbController;
 use estudiante\Estudiante;
-use actividad\Actividad;
 
 class UsuarioController extends BaseController
 {

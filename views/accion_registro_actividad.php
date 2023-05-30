@@ -9,10 +9,12 @@ use actividadController\ActividadController;
 
 $actividad= new Actividad();
 
-$actividad->setId($_POST['id']);
+// $actividad->setId($_POST['id']);
 $actividad->setDescr($_POST['descripcion']);
 $actividad->setNota($_POST['nota']);
 $actividad->setCodEs($_POST['codigo']);
+$codigo = $_POST['codigo'];
+
 
 $actividadController = new ActividadController();
 $resultado = $actividadController->create($actividad);
@@ -23,4 +25,7 @@ if ($resultado) {
 }
 ?>
 <br>
-<a href="../index.php">Volver al inicio</a>
+<a href="../indexAc.php?codigo=<?php echo $codigo; ?>">Regresar a la lista de actividades</a>
+
+
+
